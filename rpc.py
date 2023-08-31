@@ -55,6 +55,7 @@ while True:
             small_text = "#NoWar",
             start = getTimer()
         )
+        sleep(8)
     except Exception as e:
         print(e)
         print("Отправьте скриншот ошибки DS: neynq или TG: @neynq")
