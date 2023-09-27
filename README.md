@@ -8,7 +8,7 @@
 + `cd discord-yt-rpc`
 + `pip3 install -r requirements.txt`
 + `ytmusicapi oauth` (Следуйте инструкциям из консоли!!!)
-+ `python3 rpc.py`
++ `python3 rpc.pyw`
 # Windows
 + Установите Python 3.8+ с оффициального сайта
 + Установите git или установите репозиторий как архив и распакуйте на рабочем столе!
