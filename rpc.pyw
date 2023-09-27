@@ -3,6 +3,7 @@ from ytmusicapi import YTMusic
 
 from pystray import Icon as pystrayIcon, Menu, MenuItem
 import PIL.Image
+import threading
 import os
 
 from json import load, dump
@@ -61,27 +62,38 @@ def getTimer() -> int:
             data = dump(data, f)
 
 print("YouTube Music 'Discord rich presence' Client Started!")
-icon.run()
-while True:    
-    try:
-        name, id, img, artist = getTrack()
-        RPC.update(
-            buttons = [{"label": "Слушать", "url": f"https://music.youtube.com/watch?v={id}"}],
-            state = "▶ " + name,
-            details = artist,
-            large_image = img,
-            large_text = "YouTube Music",
-            small_image = "yt_avatar",
-            small_text = "#NoWar",
-            start = getTimer()
-        )
-        sleep(8)
-    except Exception as e:
-        print(e)
-        print("Отправьте скриншот ошибки DS: neynq или TG: @neynq")
-        RPC.update(
-            state="Сейчас ничего не играет!",
-            large_image="yt_avatar",
-            large_text="YouTube Music"
-        )
-        sleep(60)
+def tray():
+    icon.run()
+
+def ytmrpc():
+    while True:
+        try:
+            print(1)
+            name, id, img, artist = getTrack()
+            RPC.update(
+                buttons = [{"label": "Слушать", "url": f"https://music.youtube.com/watch?v={id}"}],
+                state = "▶ " + name,
+                details = artist,
+                large_image = img,
+                large_text = "YouTube Music",
+                small_image = "yt_avatar",
+                small_text = "#NoWar",
+                start = getTimer()
+            )
+            sleep(8)
+        except Exception as e:
+            print(e)
+            print("Отправьте скриншот ошибки DS: neynq или TG: @neynq")
+            RPC.update(
+                state="Сейчас ничего не играет!",
+                large_image="yt_avatar",
+                large_text="YouTube Music"
+            )
+            sleep(60)
+
+
+if __name__ == "__main__":
+    thread = threading.Thread(target=tray)
+    thread.start()
+    thread1 = threading.Thread(target=ytmrpc)
+    thread1.start()
