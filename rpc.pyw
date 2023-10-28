@@ -60,6 +60,7 @@ def getTimer() -> int:
             data["track"] = title
             data["time"] = time()
             data = dump(data, f)
+        return time()
 
 print("YouTube Music 'Discord rich presence' Client Started!")
 def tray():
